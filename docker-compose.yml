@@ -1,0 +1,25 @@
+services:
+  controller:
+    build:
+      context: .
+      dockerfile: ./controller/Dockerfile
+      target: base
+    container_name: controller
+    networks:
+      - test
+
+  target:
+    build:
+      context: .
+      dockerfile: ./target/Dockerfile
+      target: base
+    container_name: target
+    networks:
+      - test
+    ports:
+      - "22:22"
+
+networks:
+  test:
+    driver: bridge
+    name: test
